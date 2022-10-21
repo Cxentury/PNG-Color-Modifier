@@ -1,0 +1,13 @@
+00 00 00 0d 49 48 44 52 00 00 03 98 00 00 02 3f 04 03 00 00 00 e0 88 6b 6c
+
+    4 bytes
+| 00 00 00 0d |: Length
+49 48 44 52 : Chunk type
+00 00 03 98 00 00 02 3f 04 03 00 00 : Chunck data*
+e0 88 6b 6c : CRC
+
+* 00 00 03 98 : width of image
+  00 00 02 3f : height of image
+  ...
+
+see : https://en.wikipedia.org/wiki/Portable_Network_Graphics
