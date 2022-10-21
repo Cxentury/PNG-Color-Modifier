@@ -33,13 +33,7 @@ int main(int argc, char const *argv[]) {
 
   rd=fread(buff,1,dataLength,image);
 
-  /*
-  buff[0..3] correspond à la largeur(width) de l'image (voir dossier explications)
-  la width de l'image est sur 4 octets (buff[..]= 1 octet)
-  on créé donc un uint (24 bit / 4 octets) en faisant des opérations OR entre les bit de chaque octets
-  (buff[0] sont les bits de plus grande valeur donc on les 'décale' à la fin en faisant <<24)
-  see : https://dev-notes.eu/2019/07/Convert-an-Array-of-Unsigned-Chars-to-an-int32_t-Value/
-  */
+  //Converting bytes to int32
   uint32_t width= buff[0] << 24 | buff[1] << 16 | buff[2] << 8 | buff[3];
   uint32_t height= buff[4] << 24 | buff[5] << 16 | buff[6] << 8 | buff[7];
   int bit_depth=buff[8];
@@ -84,14 +78,14 @@ int main(int argc, char const *argv[]) {
   printf("\nValues to change with (0-255): ");
   scanf("%u %u %u",&values[0],&values[1],&values[2]);
 
-  //Changing color value *3 because there are three values per colo
+  //Changing color value *3 because there are three values per color
   // 0: R,G,B(0,0,0)
   // 1: R,G,B(1,1,1)
   buff[colorChange*3]=values[0];
   buff[colorChange*3+1]=values[1];
   buff[colorChange*3+2]=values[2];
 
-  //On remplace l'octet qui était là à l'origine
+  //Replacing previously existing bytes
   fseek(image,-dataLength+colorChange*3,SEEK_CUR);
   fputc(buff[colorChange*3],image);
   fputc(buff[colorChange*3+1],image);
