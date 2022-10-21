@@ -16,7 +16,8 @@ There are a lot of thing to optimise in this code but it is not the point
 
 ## Compilation & Execution
 
-`gcc -o <name of executable> duplicate.c crc32.c main.c`  
+`gcc -o main duplicate.c crc32.c main.c`
+
 `./main <path>`
 
 
